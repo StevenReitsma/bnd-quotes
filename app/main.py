@@ -16,14 +16,14 @@ app = FastAPI(
 
 # Create caches
 fund_name_cache = TTLCache(maxsize=128, ttl=3600)
-quote_cache = TTLCache(maxsize=128, ttl=300)
+quote_cache = TTLCache(maxsize=1024, ttl=3600)
 
 
 @app.get(
     "/quotes_by_id/{fundId}",
     response_model=List[Quote],
     summary="Get quotes by fund ID",
-    description="This endpoint returns the quotes of the given fund ID of the past 30 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund IDs.",
+    description="This endpoint returns the quotes of the given fund ID of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund IDs.",
 )
 async def get_quote_by_id(fundId: int, response: Response, page: Optional[int] = 1):
     if page < 1:
@@ -49,7 +49,7 @@ async def get_quote_by_id(fundId: int, response: Response, page: Optional[int] =
 
     data = {
         "page": page,
-        "pageSize": 30,
+        "pageSize": 60,
         "fundId": fundId,
         "startDate": "01-01-2010",
         "endDate": date.today().strftime("%d-%m-%Y"),
@@ -81,7 +81,7 @@ async def get_quote_by_id(fundId: int, response: Response, page: Optional[int] =
     "/quotes/{fundName}",
     response_model=List[Quote],
     summary="Get quotes by fund name",
-    description="This endpoint returns the quotes of the given fund name of the past 30 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund names.",
+    description="This endpoint returns the quotes of the given fund name of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund names.",
 )
 async def get_quote_by_name(fundName: str, response: Response, page: Optional[int] = 1):
     funds = await list_funds()
