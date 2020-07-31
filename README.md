@@ -1,8 +1,8 @@
-# bnd-quotes
+# Brand New Day quotes
 
 API Docs: https://bnd.properchaos.nl/docs
 
-Delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for PortfolioPerformance. 
+This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for PortfolioPerformance.
 You can either self-host this application, or you can use the publicly available endpoint.
 
 ## Using the public endpoint in PortfolioPerformance
@@ -16,3 +16,19 @@ To use the endpoint in PortfolioPerformance, use the following configuration:
 | Path to Close | `$.[*].Close` |
 
 You can replace `bnd-wereld-indexfonds-hedged` with any of the names you can find [here](https://bnd.properchaos.nl/funds).
+
+## Self-hosting
+To self-host this project, use the `Dockerfile`:
+
+```
+$ git clone git@github.com:StevenReitsma/bnd-quotes.git
+$ cd bnd-quotes
+$ docker build --tag bnd-quotes .
+$ docker run -it --port 8080:8080 bnd-quotes
+```
+
+You can then access the API at `http://localhost:8080/docs`.
+
+## Disclaimer
+
+This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Brand New Day, or any of its subsidiaries or its affiliates. The official Brand New Day website can be found at https://brandnewday.nl.
