@@ -8,8 +8,8 @@ You can either self-host this application, or you can use the publicly available
 ## Using the public endpoint in PortfolioPerformance
 To use the endpoint in PortfolioPerformance, use the following configuration:
 
-| | | |
-|-|-|-|
+| Setting | Value |
+|-|-|
 | Provider  | JSON  |
 | Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-hedged?page={PAGE}`  |
 | Path to Date | `$.[*].Date` |
