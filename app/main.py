@@ -1,6 +1,6 @@
 import requests, json
 from datetime import datetime, date
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI, Response, status, HTTPException
 from starlette.responses import RedirectResponse
 from typing import Optional, List
 from cachetools import TTLCache
@@ -26,16 +26,14 @@ quote_cache = TTLCache(maxsize=1024, ttl=3600)
     summary="Get quotes by fund ID",
     description="This endpoint returns the quotes of the given fund ID of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund IDs.",
 )
-async def get_quote_by_id(fundId: int, response: Response, page: Optional[int] = 1):
+async def get_quote_by_id(fundId: int, page: Optional[int] = 1):
     if page < 1:
-        response.status_code = status.HTTP_400_BAD_REQUEST
-        return "Invalid page"
+        raise HTTPException(status_code=400, detail="Invalid page")
 
     funds = await list_funds()
 
     if fundId not in funds.values():
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return "Unknown fund ID"
+        raise HTTPException(status_code=404, detail="Unknown fund ID")
 
     # Create a hash of the request for caching purposes
     hashId = str(fundId) + "|" + str(page)
@@ -84,15 +82,14 @@ async def get_quote_by_id(fundId: int, response: Response, page: Optional[int] =
     summary="Get quotes by fund name",
     description="This endpoint returns the quotes of the given fund name of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund names.",
 )
-async def get_quote_by_name(fundName: str, response: Response, page: Optional[int] = 1):
+async def get_quote_by_name(fundName: str, page: Optional[int] = 1):
     funds = await list_funds()
 
     if fundName not in funds:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return "Unknown fund name"
+        raise HTTPException(status_code=404, detail="Unknown fund name")
 
     fundId = funds[fundName]
-    return await get_quote_by_id(fundId, response, page)
+    return await get_quote_by_id(fundId, page)
 
 
 @app.get(
