@@ -2,7 +2,7 @@
 
 API Docs: https://bnd.properchaos.nl/docs
 
-This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for PortfolioPerformance.
+This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for [PortfolioPerformance](https://www.portfolio-performance.info/en/).
 You can either self-host this application, or you can use the publicly available endpoint.
 
 ## Using the public endpoint in PortfolioPerformance
@@ -15,7 +15,8 @@ To use the endpoint in PortfolioPerformance, use the following configuration:
 | Path to Date | `$.[*].Date` |
 | Path to Close | `$.[*].Close` |
 
-You can replace `bnd-wereld-indexfonds-hedged` with any of the names you can find [here](https://bnd.properchaos.nl/funds).
+You can replace `bnd-wereld-indexfonds-hedged` with any of the fund names you can find [here](https://bnd.properchaos.nl/funds).
+The `?page={PAGE}` part makes sure PortfolioPerformance retrieves the entire history of quotes, not just the last 60 days.
 
 ## Self-hosting
 To self-host this project, use the `Dockerfile`:
