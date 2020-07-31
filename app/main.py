@@ -1,6 +1,7 @@
 import requests, json
 from datetime import datetime, date
 from fastapi import FastAPI, Response, status
+from starlette.responses import RedirectResponse
 from typing import Optional, List
 from cachetools import TTLCache
 
@@ -104,6 +105,15 @@ async def list_funds():
     if len(fund_name_cache) == 0:
         await fill_fund_name_cache()
     return fund_name_cache
+
+
+@app.get(
+    "/",
+    include_in_schema=False,
+)
+async def index(response: Response):
+    response = RedirectResponse(url='https://github.com/StevenReitsma/bnd-quotes', status_code=303)
+    return response
 
 
 async def fill_fund_name_cache():
