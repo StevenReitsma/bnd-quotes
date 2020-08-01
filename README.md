@@ -8,7 +8,8 @@ This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds
 You can either self-host this application, or you can use the publicly available endpoint.
 
 ## Using the public endpoint in PortfolioPerformance
-To use the endpoint in PortfolioPerformance, use the following configuration:
+To use the endpoint in PortfolioPerformance for `Historical Quotes`, use the following configuration.
+For `Latest Quote`, use the `(same as historical quotes)` option.
 
 | Setting | Value |
 |-|-|
@@ -41,7 +42,8 @@ Dit project zorgt ervoor dat [PortfolioPerformance](https://www.portfolio-perfor
 Je kunt deze applicatie zelf hosten, of het publieke endpoint gebruiken.
 
 ## Het publieke endpoint gebruiken in PortfolioPerformance
-Gebruik onderstaande instellingen om het publieke endpoint in PortfolioPerformance te gebruiken:
+Gebruik onderstaande instellingen bij `Historical Quotes` om het publieke endpoint in PortfolioPerformance te gebruiken.
+Voor `Latest Quote` moet je de `(same as historical quotes)` optie gebruiken.
 
 | Instelling | Waarde |
 |-|-|
