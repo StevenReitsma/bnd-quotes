@@ -27,10 +27,10 @@ To self-host this project, use the `Dockerfile`:
 $ git clone git@github.com:StevenReitsma/bnd-quotes.git
 $ cd bnd-quotes
 $ docker build --tag bnd-quotes .
-$ docker run -it -p 8080:8080 bnd-quotes
+$ docker run -it -p 80:80 bnd-quotes
 ```
 
-You can then access the API at `http://localhost:8080/docs`.
+You can then access the API at `http://localhost/docs`.
 
 
 
@@ -61,10 +61,10 @@ Om de applicatie zelf te draaien gebruik je de `Dockerfile`:
 $ git clone git@github.com:StevenReitsma/bnd-quotes.git
 $ cd bnd-quotes
 $ docker build --tag bnd-quotes .
-$ docker run -it -p 8080:8080 bnd-quotes
+$ docker run -it -p 80:80 bnd-quotes
 ```
 
-Je kunt de API dan benaderen via `http://localhost:8080/docs`.
+Je kunt de API dan benaderen via `http://localhost/docs`.
 
 ## Disclaimer
 
