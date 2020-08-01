@@ -7,6 +7,8 @@ API Docs: https://bnd.properchaos.nl/docs
 This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for [PortfolioPerformance](https://www.portfolio-performance.info/en/).
 You can either self-host this application, or you can use the publicly available endpoint.
 
+The minimum version of PortfolioPerformance that is compatible with this project is 0.45.0.
+
 ## Using the public endpoint in PortfolioPerformance
 To use the endpoint in PortfolioPerformance for `Historical Quotes`, use the following configuration.
 For `Latest Quote`, use the `(same as historical quotes)` option.
@@ -40,6 +42,8 @@ API documentatie: https://bnd.properchaos.nl/docs
 
 Dit project zorgt ervoor dat [PortfolioPerformance](https://www.portfolio-performance.info/en/) de koersen van [BrandNewDay.nl](https://brandnewday.nl) fondsen op de juiste manier kan importeren.
 Je kunt deze applicatie zelf hosten, of het publieke endpoint gebruiken.
+
+Je hebt minimaal versie 0.45.0 van PortfolioPerformance nodig.
 
 ## Het publieke endpoint gebruiken in PortfolioPerformance
 Gebruik onderstaande instellingen bij `Historical Quotes` om het publieke endpoint in PortfolioPerformance te gebruiken.
