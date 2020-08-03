@@ -16,8 +16,8 @@ app = FastAPI(
 
 
 # Create caches
-fund_name_cache = TTLCache(maxsize=128, ttl=3600)
-quote_cache = TTLCache(maxsize=1024, ttl=3600)
+fund_name_cache = TTLCache(maxsize=128, ttl=10800)  # 3 hours
+quote_cache = TTLCache(maxsize=1024, ttl=10800)  # 3 hours
 
 
 @app.get(
