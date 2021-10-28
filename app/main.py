@@ -11,7 +11,7 @@ from models import Quote
 app = FastAPI(
     title="BND Quotes",
     description="This project aims to deliver quotes from BrandNewDay.nl funds in a structured manner, with support for PortfolioPerformance.",
-    version="1.0.0",
+    version="1.1.0",
 )
 
 
@@ -42,35 +42,19 @@ async def get_quote_by_id(fundId: int, page: Optional[int] = 1):
         # Result is cached, return it
         return quote_cache[hashId]
 
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    }
-
-    data = {
-        "page": page,
-        "pageSize": 60,
-        "fundId": fundId,
-        "startDate": "01-01-2010",
-        "endDate": date.today().strftime("%d-%m-%Y"),
-    }
-
-    response = requests.post(
-        url="https://secure.brandnewday.nl/service/navvaluesforfund",
-        headers=headers,
-        data=data,
+    response = requests.get(
+        url=f"https://devrobotapi.azurewebsites.net/roboadvisor/v1/fundrates?id={fundId}",
     )
-    bnd_json = response.json()
+    bnd_json = response.json()["rates"]
 
     quote_cache[hashId] = [
         {
-            "Date": datetime.utcfromtimestamp(
-                int(x["RateDate"].replace("/Date(", "").replace(")/", "")) / 1000
-            ),
-            "Close": x["LastRate"],
-            "Ask": x["AskRate"],
-            "Bid": x["BidRate"],
+            "Date": datetime.strptime(x["date"], "%Y-%m-%dT%H:%M:%S"),
+            "Close": x["nav"],
+            "Ask": x["askPrice"],
+            "Bid": x["bidPrice"],
         }
-        for x in bnd_json["Data"]
+        for x in bnd_json
     ]
 
     return quote_cache[hashId]
@@ -114,10 +98,10 @@ async def index(response: Response):
 
 
 async def fill_fund_name_cache():
-    response = requests.get(url="https://secure.brandnewday.nl/service/getfunds")
-    bnd_json = json.loads(response.json()["Message"])
+    response = requests.get(url="https://devrobotapi.azurewebsites.net/roboadvisor/v1/funds")
+    bnd_json = response.json()["data"]
 
     fund_name_cache.clear()
 
     for x in bnd_json:
-        fund_name_cache[str.lower(x["Value"]).replace(" ", "-")] = x["Key"]
+        fund_name_cache[str.lower(x["name"]).replace(" ", "-")] = x["id"]
