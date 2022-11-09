@@ -16,11 +16,11 @@ For `Latest Quote`, use the `(same as historical quotes)` option.
 | Setting | Value |
 |-|-|
 | Provider  | JSON  |
-| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-c-hedged?page={PAGE}`  |
+| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-hedged?page={PAGE}`  |
 | Path to Date | `$.[*].Date` |
 | Path to Close | `$.[*].Close` |
 
-You can replace `bnd-wereld-indexfonds-c-hedged` in the Feed URL with any of the fund names you can find [here](https://bnd.properchaos.nl/funds) (use the fund names, ignore the numbers).
+You can replace `bnd-wereld-indexfonds-hedged` in the Feed URL with any of the fund names you can find [here](https://bnd.properchaos.nl/funds) (use the fund names, ignore the numbers).
 
 ## Self-hosting
 To self-host this project, use the `Dockerfile`:
@@ -52,11 +52,11 @@ Voor `Latest Quote` moet je de `(same as historical quotes)` optie gebruiken.
 | Instelling | Waarde |
 |-|-|
 | Provider  | JSON  |
-| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-c-hedged?page={PAGE}`  |
+| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-hedged?page={PAGE}`  |
 | Path to Date | `$.[*].Date` |
 | Path to Close | `$.[*].Close` |
 
-Je kunt `bnd-wereld-indexfonds-c-hedged` in de Feed URL vervangen met de naam van elk ander fonds. [Hier](https://bnd.properchaos.nl/funds) vind je een lijst van alle fondsen (gebruik alleen de naam van het fonds, de getallen kun je negeren).
+Je kunt `bnd-wereld-indexfonds-hedged` in de Feed URL vervangen met de naam van elk ander fonds. [Hier](https://bnd.properchaos.nl/funds) vind je een lijst van alle fondsen (gebruik alleen de naam van het fonds, de getallen kun je negeren).
 
 ## Zelf hosten
 Om de applicatie zelf te draaien gebruik je de `Dockerfile`:
