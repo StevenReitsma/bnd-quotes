@@ -24,19 +24,16 @@ quote_cache = TTLCache(maxsize=1024, ttl=10800)  # 3 hours
     "/quotes_by_id/{fundId}",
     response_model=List[Quote],
     summary="Get quotes by fund ID",
-    description="This endpoint returns the quotes of the given fund ID of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund IDs.",
+    description="This endpoint returns the quotes of the given fund ID of the past 60 days. Use the `/funds` endpoint to get a list of all fund IDs.",
 )
-async def get_quote_by_id(fundId: int, page: Optional[int] = 1):
-    if page < 1:
-        raise HTTPException(status_code=400, detail="Invalid page")
-
+async def get_quote_by_id(fundId: int):
     funds = await list_funds()
 
     if fundId not in funds.values():
         raise HTTPException(status_code=404, detail="Unknown fund ID")
 
     # Create a hash of the request for caching purposes
-    hashId = str(fundId) + "|" + str(page)
+    hashId = str(fundId)
 
     if hashId in quote_cache:
         # Result is cached, return it
@@ -64,16 +61,16 @@ async def get_quote_by_id(fundId: int, page: Optional[int] = 1):
     "/quotes/{fundName}",
     response_model=List[Quote],
     summary="Get quotes by fund name",
-    description="This endpoint returns the quotes of the given fund name of the past 60 days. Use the `page` argument to get quotes further into the past. Use the `/funds` endpoint to get a list of all fund names.",
+    description="This endpoint returns the quotes of the given fund name of the past 60 days. Use the `/funds` endpoint to get a list of all fund names.",
 )
-async def get_quote_by_name(fundName: str, page: Optional[int] = 1):
+async def get_quote_by_name(fundName: str):
     funds = await list_funds()
 
     if fundName not in funds:
         raise HTTPException(status_code=404, detail="Unknown fund name")
 
     fundId = funds[fundName]
-    return await get_quote_by_id(fundId, page)
+    return await get_quote_by_id(fundId)
 
 
 @app.get(
