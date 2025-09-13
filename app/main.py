@@ -40,7 +40,7 @@ async def get_quote_by_id(fundId: int):
         return quote_cache[hashId]
 
     response = requests.get(
-        url=f"https://devrobotapi.azurewebsites.net/roboadvisor/v1/fundrates?id={fundId}",
+        url=f"https://devrobotapi.azurewebsites.net/v1/fundrates?id={fundId}",
     )
     bnd_json = response.json()["rates"]
 
@@ -95,10 +95,11 @@ async def index(response: Response):
 
 
 async def fill_fund_name_cache():
-    response = requests.get(url="https://devrobotapi.azurewebsites.net/roboadvisor/v1/funds")
+    response = requests.get(url="https://devrobotapi.azurewebsites.net/v1/funds")
     bnd_json = response.json()["data"]
 
     fund_name_cache.clear()
 
     for x in bnd_json:
         fund_name_cache[str.lower(x["name"]).replace(" ", "-")] = x["id"]
+
