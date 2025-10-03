@@ -2,74 +2,39 @@
 
 [🇬🇧 English](#brand-new-day-quotes) | [🇳🇱 Nederlands](#brand-new-day-koersen)
 
-API Docs: https://bnd.properchaos.nl/docs
+## ⚠️ Deprecated
+This repository is deprecated.
+Brand New Day now has their own API.
+The public endpoint (`bnd.properchaos.nl`) has been taken offline.
 
-This project delivers quotes from [BrandNewDay.nl](https://brandnewday.nl) funds in a structured manner, with support for [PortfolioPerformance](https://www.portfolio-performance.info/en/).
-You can either self-host this application, or you can use the publicly available endpoint.
-
-The minimum version of PortfolioPerformance that is compatible with this project is 0.45.0.
-
-## Using the public endpoint in PortfolioPerformance
-To use the endpoint in PortfolioPerformance for `Historical Quotes`, use the following configuration.
-For `Latest Quote`, use the `(same as historical quotes)` option.
+Use the following settings to use the official API in Portfolio Performance:
 
 | Setting | Value |
 |-|-|
 | Provider  | JSON  |
-| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-hedged?page={PAGE}`  |
-| Path to Date | `$.[*].Date` |
-| Path to Close | `$.[*].Close` |
+| Feed URL  | `https://devrobotapi.azurewebsites.net/v1/fundrates?id=1002`  |
+| Path to Date | `$.rates.[*].date` |
+| Path to Close | `$.rates.[*].nav` |
 
-You can replace `bnd-wereld-indexfonds-hedged` in the Feed URL with any of the fund names you can find [here](https://bnd.properchaos.nl/funds) (use the fund names, ignore the numbers).
-
-## Self-hosting
-To self-host this project, use the `Dockerfile`:
-
-```
-$ git clone git@github.com:StevenReitsma/bnd-quotes.git
-$ cd bnd-quotes
-$ docker build --tag bnd-quotes .
-$ docker run -it -p 80:80 bnd-quotes
-```
-
-You can then access the API at `http://localhost/docs`.
-
-
-
+Look up the `id` for your wanted fund at this URL: https://devrobotapi.azurewebsites.net/v1/funds
 
 # Brand New Day koersen
-API documentatie: https://bnd.properchaos.nl/docs
 
-Dit project zorgt ervoor dat [PortfolioPerformance](https://www.portfolio-performance.info/en/) de koersen van [BrandNewDay.nl](https://brandnewday.nl) fondsen op de juiste manier kan importeren.
-Je kunt deze applicatie zelf hosten, of het publieke endpoint gebruiken.
+## ⚠️ Niet meer onderhouden
+Deze repository wordt niet meer onderhouden.
+Brand New Day heeft nu een eigen API.
+Het publieke endpoint (`bnd.properchaos.nl`) is offline gehaald.
 
-Je hebt minimaal versie 0.45.0 van PortfolioPerformance nodig.
-
-## Het publieke endpoint gebruiken in PortfolioPerformance
-Gebruik onderstaande instellingen bij `Historical Quotes` om het publieke endpoint in PortfolioPerformance te gebruiken.
-Voor `Latest Quote` moet je de `(same as historical quotes)` optie gebruiken.
+Gebruik de onderstaande instellingen om de officiele API te gebruiken in Portfolio Performance:
 
 | Instelling | Waarde |
 |-|-|
 | Provider  | JSON  |
-| Feed URL  | `https://bnd.properchaos.nl/quotes/bnd-wereld-indexfonds-hedged?page={PAGE}`  |
-| Path to Date | `$.[*].Date` |
-| Path to Close | `$.[*].Close` |
+| Feed URL  | `https://devrobotapi.azurewebsites.net/v1/fundrates?id=1002`  |
+| Path to Date | `$.rates.[*].date` |
+| Path to Close | `$.rates.[*].nav` |
 
-Je kunt `bnd-wereld-indexfonds-hedged` in de Feed URL vervangen met de naam van elk ander fonds. [Hier](https://bnd.properchaos.nl/funds) vind je een lijst van alle fondsen (gebruik alleen de naam van het fonds, de getallen kun je negeren).
-
-## Zelf hosten
-Om de applicatie zelf te draaien gebruik je de `Dockerfile`:
-
-```
-$ git clone git@github.com:StevenReitsma/bnd-quotes.git
-$ cd bnd-quotes
-$ docker build --tag bnd-quotes .
-$ docker run -it -p 80:80 bnd-quotes
-```
-
-Je kunt de API dan benaderen via `http://localhost/docs`.
+Op de volgende URL kun je vinden wat het `id` is van je gewenste fonds: https://devrobotapi.azurewebsites.net/v1/funds
 
 ## Disclaimer
-
 This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Brand New Day, or any of its subsidiaries or its affiliates. The official Brand New Day website can be found at https://brandnewday.nl.
